@@ -1,0 +1,85 @@
+import React from 'react'
+import { Avatar, AvatarFallback, AvatarImage, AvatarBadge } from "@/components/ui/avatar"
+import { ModeToggle } from './Mode-toggel'
+import {
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverTitle,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { Button } from '../ui/button'
+import { Menu, LogOutIcon, User2 } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import jobImage from "../../assets/job.png"
+const Navbar = () => {
+  const user = false;
+  return (
+    <div>
+      <div className='flex justify-between items-center mx-auto max-w-7xl h-16 w-full px-4 border'>
+        <div>
+          {/* <h1 className='text-2xl font-bold'>Job<span className='text-[#F83002]'>Portal</span></h1> */}
+          <img src={jobImage} className='h-30 w-30  lg:h-40 lg:w-40' />
+        </div>
+        <div>
+          <ul className='flex font-medium items-center gap-5'>
+            <div className='hidden lg:flex items-center gap-5'>
+              <li>Home</li>
+              <li>Jobs</li>
+              <li>Browse</li>
+            </div>
+            <ModeToggle />
+            {!user ? (
+              <li className='flex gap-2'>
+                <Link to="/login"><Button variant='outline' size='sm' className="cursor-pointer">Login</Button></Link>
+                <Link to="/signup"><Button size='sm' className="cursor-pointer">SignUp</Button></Link>
+              </li>
+            ) : (
+              <li className='cursor-pointer'>
+                <Popover>
+                  <PopoverTrigger
+                    render={
+                      <Avatar>
+                        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn"
+                        ></AvatarImage>
+                      </Avatar>
+                    } />
+                  <PopoverContent className="w-80">
+                    <div className='flex gap-4 space-y-4'>
+                      <Avatar>
+                        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn"
+                        ></AvatarImage>
+                      </Avatar>
+                      <div>
+                        <PopoverTitle>Asif MernStack</PopoverTitle>
+                        <PopoverDescription className="text-sm text-muted-foreground">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, laboriosam.</PopoverDescription>
+                      </div>
+                    </div>
+                    <div className='px-12 flex gap-2'>
+                      <Button size='sm' variant='outline'> <User2 />View Profile</Button>
+                      <Button variant='destructive' size='sm'> <LogOutIcon /> Logout</Button>
+                    </div>
+                  </PopoverContent>
+                </Popover>
+              </li>
+            )}
+            <li>
+              <Popover>
+                <PopoverTrigger render={<Menu />} />
+                <PopoverContent align="bottom" className="w-40" side='right'>
+                  <div className="flex flex-col gap-3">
+                    <a href="/">Home</a>
+                    <a href="/jobs">Jobs</a>
+                    <a href="/browse">Browse</a>
+                  </div>
+                </PopoverContent>
+              </Popover>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Navbar

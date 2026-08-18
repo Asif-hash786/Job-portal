@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id          Int           @id @default(autoincrement())
+  fullname    String
+  email       String        @unique
+  phoneNumber Int
+  password    String
+  role        Role          @default(student)
+  application Application[]
+  company     Company[]
+  job         Job[]
+  profile     Profile?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Profile {
+  id                 Int      @id @default(autoincrement())
+  bio                String
+  skills             String
+  resume             String
+  resumeOriginalName String
+  profilePhoto       String   @default("")
+  userId             Int      @unique
+  user               User     @relation(fields: [userId], references: [id])
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model Job {
+  id           Int           @id @default(autoincrement())
+  title        String
+  description  String
+  requirements String[]
+  salary       Int
+  location     String
+  jobType      String
+  position     Int
+  companyId    Int
+  userId       Int
+  applications Application[]
+  company      Company       @relation(fields: [companyId], references: [id])
+  user         User          @relation(fields: [userId], references: [id])
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Company {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  website     String?
+  location    String?
+  logo        String?
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
+  job         Job[]
+  createdat   DateTime @default(now())
+  updatedat   DateTime @updatedAt
+}
+
+model Application {
+  id        Int      @id @default(autoincrement())
+  jobId     Int      @unique
+  applicant Int
+  status    Status   @default(pending)
+  createdat DateTime @default(now())
+  updatedat DateTime @updatedAt
+  user      User     @relation(fields: [applicant], references: [id])
+  job       Job      @relation(fields: [jobId], references: [id])
+
+  @@unique([jobId, applicant])
+}
+
+enum Role {
+  student
+  recruiter
+}
+
+enum Status {
+  pending
+  accepted
+  rejected
+}
