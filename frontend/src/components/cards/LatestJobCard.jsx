@@ -3,7 +3,7 @@ import { Badge } from '../ui/badge'
 
 const LatestJobCard = () => {
   return (
-    <div className='p-5 rounded-md shadow-xl bg-white border-gray-100'>
+    <div className='p-5 rounded-md shadow-xl border border-gray-100'>
       <div>
         <h1 className='font-medium text-lg'>Company Name</h1>
         <p className='text-sm text-gray-500'>India</p>

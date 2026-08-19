@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { loginUser } from '@/services/api'
 import { toast } from '@/components/ui/toast'
 import { Spinner } from '@/components/ui/spinner'
+import { setUser } from '@/redux/authSlice'
 const Login = () => {
   const [input, setInput] = useState({
     email: "",
@@ -32,6 +33,7 @@ const Login = () => {
         <Spinner/>
       }
       if (response.data.success) {
+        // dispatch(setUser(response.data.user))
         toast.add({
           type: "success",
           title: response.data.message,
