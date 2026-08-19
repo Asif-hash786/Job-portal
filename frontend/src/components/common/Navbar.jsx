@@ -16,23 +16,23 @@ const Navbar = () => {
   const user = false;
   return (
     <div>
-      <div className='flex justify-between items-center mx-auto max-w-7xl h-16 w-full px-4 border'>
+      <div className='flex justify-between items-center mx-auto max-w-7xl h-16 w-full px-4'>
         <div>
           {/* <h1 className='text-2xl font-bold'>Job<span className='text-[#F83002]'>Portal</span></h1> */}
           <img src={jobImage} className='h-30 w-30  lg:h-40 lg:w-40' />
         </div>
         <div>
           <ul className='flex font-medium items-center gap-5'>
-            <div className='hidden lg:flex items-center gap-5'>
-              <li>Home</li>
-              <li>Jobs</li>
-              <li>Browse</li>
+            <div className='hidden lg:flex items-cente  r gap-5'>
+              <Link to="/">Home</Link>
+              <Link to="/jobs">Jobs</Link>
+              <Link to="/browse">Browse</Link>
             </div>
             <ModeToggle />
             {!user ? (
               <li className='flex gap-2'>
                 <Link to="/login"><Button variant='outline' size='sm' className="cursor-pointer">Login</Button></Link>
-                <Link to="/signup"><Button size='sm' className="cursor-pointer">SignUp</Button></Link>
+                <Link to="/signup"><Button size='sm' className="cursor-pointer bg-first">SignUp</Button></Link>
               </li>
             ) : (
               <li className='cursor-pointer'>

@@ -129,6 +129,6 @@
     }
 }
 @theme{
-  --color-primary : #03A6A1;
-  --color-secondary : #15396B;
+  --color-first : #03A6A1;
+  --color-second : #15396B;
 }
