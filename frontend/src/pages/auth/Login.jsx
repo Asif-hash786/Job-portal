@@ -9,14 +9,16 @@ import { loginUser } from '@/services/api'
 import { toast } from '@/components/ui/toast'
 import { Spinner } from '@/components/ui/spinner'
 import { setUser } from '@/redux/authSlice'
+import { useDispatch, useSelector } from 'react-redux'
 const Login = () => {
   const [input, setInput] = useState({
     email: "",
     password: "",
     role: "",
   });
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const changeEventHandler = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   }
@@ -29,11 +31,11 @@ const Login = () => {
           "Content-Type": "application/json"
         }
       })
-      if(loading){
-        <Spinner/>
+      if (loading) {
+        <Spinner />
       }
       if (response.data.success) {
-        // dispatch(setUser(response.data.user))
+        dispatch(setUser(response.data.User))
         toast.add({
           type: "success",
           title: response.data.message,
@@ -44,17 +46,16 @@ const Login = () => {
     } catch (error) {
       console.log(error);
       toast.add({
-          type: "error",
-          title: "Login failed",
-          description: error.response?.data?.message || "Something went wrong"
-        });
-    } finally{
+        type: "error",
+        title: "Login failed",
+        description: error.response?.data?.message || "Something went wrong"
+      });
+    } finally {
       setLoading(false);
     }
   }
   return (
     <div>
-      <Navbar />
       <div className='flex items-center justify-center max-w-7xl mx-auto '>
         <form onSubmit={submitHandler} className='w-1/3 border border-gray-200 rounded-md p-4 my-10 shadow-xl'>
           <h1 className='text-center font-semibold'>Login</h1>

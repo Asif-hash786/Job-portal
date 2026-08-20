@@ -12,8 +12,9 @@ import { Button } from '../ui/button'
 import { Menu, LogOutIcon, User2 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import jobImage from "../../assets/job.png"
+import { useSelector } from 'react-redux'
 const Navbar = () => {
-  const user = false;
+  const { user } = useSelector(store => store.auth)
   return (
     <div>
       <div className='flex justify-between items-center mx-auto max-w-7xl h-16 w-full px-4'>
@@ -56,7 +57,7 @@ const Navbar = () => {
                       </div>
                     </div>
                     <div className='px-12 flex gap-2'>
-                      <Button size='sm' variant='outline'> <User2 />View Profile</Button>
+                      <Button size='sm' variant='outline'> <User2 /><Link to="/profile">View Profile</Link></Button>
                       <Button variant='destructive' size='sm'> <LogOutIcon /> Logout</Button>
                     </div>
                   </PopoverContent>

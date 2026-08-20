@@ -8,7 +8,7 @@ const jobsArray = [1, 2, 3, 4, 5, 6, 7, 8];
 const Jobs = () => {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className='max-w-7xl mx-auto mt-5 flex'>
         <div className='w-[50%]'>
           <FilterCard />
