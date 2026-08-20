@@ -1,14 +1,19 @@
 import { Avatar, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Contact, Mail, Pen } from 'lucide-react'
-import React from 'react'
-
+import { Contact, Download, Mail, Pen } from 'lucide-react'
+import { Label } from '@/components/ui/label'
+import { FileText } from 'lucide-react'
+import React, { useState } from 'react'
+import AppliedJobTable from '@/components/AppliedJobTable'
+import UpdateProfileDialog from '@/components/UpdateProfileDialog'
+const skills = ["html", "css", "javaScript"]
+const isResume = true
 const Profile = () => {
-  const skills = ["html", "css", "javaScript"]
+  const [open, setOpen] = useState(false);
   return (
     <div>
-      <div className='max-w-7xl mx-auto border border-gray-200 rounded-2xl my-5 p-8'>
+      <div className='max-w-4xl mx-auto border border-gray-200 rounded-2xl my-5 p-8'>
         <div className='flex justify-between'>
           <div className='flex items-center gap-4'>
             <Avatar className="h-24 w-24">
@@ -19,7 +24,7 @@ const Profile = () => {
               <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Numquam ut a quas?</p>
             </div>
           </div>
-          <Button className="text-right" variant='outline'><Pen /></Button>
+          <Button className="text-right" variant='outline' onClick={()=>setOpen(true)}><Pen /></Button>
         </div>
         <div className='my-5'>
           <div className='flex items-center gap-3 my-2'>
@@ -32,7 +37,7 @@ const Profile = () => {
           </div>
         </div>
         <div className='my-5'>
-          <h1>Skills</h1>
+          <Button variant='outline'>Skills</Button>
           <div className='flex items-center gap-1 mt-2'>
             {
               skills.length != 0 ? skills.map((item, index) => {
@@ -44,7 +49,23 @@ const Profile = () => {
             }
           </div>
         </div>
+        <div className='gird w-full max-w-sm items-center gap-1.5 flex'>
+          <div>
+            {
+              isResume ? <a target='blank' href='https://Youtube.com' className=' w-full'><Button variant='outline'> <FileText />Resume</Button></a> :
+                <span>NA</span>
+            }
+          </div>
+          <div>
+            <Button variant='outline'><Download size={12} /></Button>
+          </div>
+        </div>
       </div>
+      <div className='max-w-4xl mx-auto rounded-2xl'>
+        <h1 className='font-bold text-lg my-5'>Applied Jobs</h1>
+        <AppliedJobTable />
+      </div>
+      <UpdateProfileDialog open={open} setOpen={setOpen}/>
     </div>
   )
 }

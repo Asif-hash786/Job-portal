@@ -6,7 +6,7 @@ import Jobs from "@/pages/Jobs";
 import Layout from "@/pages/Layout";
 import Profile from "@/pages/Profile";
 import { createBrowserRouter } from "react-router-dom";
-
+import JobDescription from "@/components/JobDescription"
 const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -34,6 +34,10 @@ const appRouter = createBrowserRouter([
       }, {
         path: "/profile",
         element: <Profile />
+      },
+      {
+        path:"/description/:id",
+        element:<JobDescription/>
       }
     ]
   }
