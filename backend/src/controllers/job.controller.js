@@ -3,9 +3,9 @@ import { prisma } from "../utils/db.js";
 export const postJob = async (req, res) => {
     console.log("post controller hit")
     try {
-        const { title, description, requirements, salary, location, jobType, position, companyId } = req.body;
+        const { title, description, requirements, salary, location, jobType, position, companyId,experienceLevel } = req.body;
         const userId = req.id;
-        if (!title || !description || !requirements || !salary || !location || !jobType || !position || !companyId) {
+        if (!title || !description || !requirements || !salary || !location || !jobType || !position || !companyId || !experienceLevel) {
             return res.status(400).json({
                 message: "Something is missing",
                 success: false
@@ -16,6 +16,7 @@ export const postJob = async (req, res) => {
                 title,
                 description,
                 requirements,
+                experienceLevel,
                 salary: Number(salary),
                 location,
                 jobType,

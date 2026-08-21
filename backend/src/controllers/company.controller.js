@@ -40,6 +40,9 @@ export const getCompany = async (req, res) => {
         const companies = await prisma.company.findMany({
             where: {
                 userId: userId
+            },
+            include:{
+                job:true
             }
         })
         if (!companies) {
@@ -63,6 +66,9 @@ export const getCompanyById = async (req, res) => {
         const company = await prisma.company.findFirst({
             where: {
                 id: companyId
+            },
+            include:{
+                job:true
             }
         })
         if (!company) {

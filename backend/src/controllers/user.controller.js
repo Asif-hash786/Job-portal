@@ -27,7 +27,7 @@ export const register = async (req, res) => {
       data: {
         fullname,
         email,
-        phoneNumber:Number(phoneNumber),
+        phoneNumber: phoneNumber,
         password: hashedPassword,
         role
       }
@@ -54,6 +54,9 @@ export const login = async (req, res) => {
     const user = await prisma.user.findFirst({
       where: {
         email: email
+      },
+      include: {
+        profile: true
       }
     });
     if (!user) {
@@ -148,21 +151,31 @@ export const updateProfile = async (req, res) => {
       where: {
         id: userId,
       },
+
       data: {
         fullname,
         email,
         phoneNumber,
+
         profile: {
-          update: {
-            bio,
-            skills: skillsArray,
-          }
-        }
+          upsert: {
+            create: {
+              bio,
+              skills: skillsArray,
+            },
+
+            update: {
+              bio,
+              skills: skillsArray,
+            },
+          },
+        },
       },
+
       include: {
-        profile: true
+        profile: true,
       },
-    })
+    });
     const User = {
       id: updateUser.id,
       fullname: updateUser.fullname,
@@ -176,8 +189,7 @@ export const updateProfile = async (req, res) => {
       User,
       success: true
     })
-    await prisma.user.update()
   } catch (error) {
-
+    console.log(error);
   }
 }
