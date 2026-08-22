@@ -1,6 +1,8 @@
 import { prisma } from "../utils/db.js"
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
+import getdataUri from "../utils/dataUri.js";
+import cloudinary from "../utils/cloudinary.js";
 export const register = async (req, res) => {
   try {
     const { fullname, email, phoneNumber, password, role } = req.body;
@@ -10,6 +12,11 @@ export const register = async (req, res) => {
         success: false
       })
     }
+    const file = req.file;
+    const fileUri = getdataUri(file);
+    const cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
+      resource_type: "image",
+    });
     const user = await prisma.user.findUnique({
       where: {
         email: email
@@ -29,8 +36,13 @@ export const register = async (req, res) => {
         email,
         phoneNumber: phoneNumber,
         password: hashedPassword,
-        role
-      }
+        role,
+        profile: {
+          create: {
+            profilePhoto: cloudResponse?.secure_url
+          }
+        }
+      },
     })
     return res.status(201).json({
       message: "User created successfully",
@@ -128,6 +140,14 @@ export const updateProfile = async (req, res) => {
     const file = req.file;
 
     //cloudinary
+
+    let cloudResponse;
+    if (file) {
+      const fileUri = getdataUri(file);
+      const cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
+        resource_type: "auto",
+      });
+    }
     let skillsArray;
     if (skills) {
       skillsArray = skills.split(",");
@@ -162,11 +182,15 @@ export const updateProfile = async (req, res) => {
             create: {
               bio,
               skills: skillsArray,
+              resume: cloudResponse?.secure_url,
+              resumeOriginalName: file?.originalname,
             },
 
             update: {
               bio,
               skills: skillsArray,
+              resume: cloudResponse?.secure_url,
+              resumeOriginalName: file?.originalname
             },
           },
         },
@@ -176,6 +200,7 @@ export const updateProfile = async (req, res) => {
         profile: true,
       },
     });
+
     const User = {
       id: updateUser.id,
       fullname: updateUser.fullname,
@@ -184,11 +209,13 @@ export const updateProfile = async (req, res) => {
       role: updateUser.role,
       profile: updateUser.profile
     }
+
     return res.status(200).json({
       message: "Profile updated successfully",
       User,
       success: true
     })
+
   } catch (error) {
     console.log(error);
   }

@@ -79,6 +79,9 @@ export const getJobById = async (req, res) => {
     const job = await prisma.job.findFirst({
         where: {
             id: jobId
+        },
+        include:{
+            applications:true
         }
     })
     if (!job) {
