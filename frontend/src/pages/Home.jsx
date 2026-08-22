@@ -1,14 +1,12 @@
 import React from 'react'
-import Navbar from '@/components/common/Navbar'
 import HeroSection from '@/components/main/HeroSection'
 import CategoryCrousel from '@/components/main/CategoryCrousel'
 import LatestJob from '@/components/main/LatestJob'
-import Footer from '@/components/common/Footer'
-import Layout from './Layout'
+import userGetAllJobs from '@/hooks/userGetAllJobs'
 const Home = () => {
+  userGetAllJobs();
   return (
     <div>
-      {/* <Navbar/> */}
         <HeroSection />
         <CategoryCrousel />
         <LatestJob />

@@ -10,11 +10,35 @@ import {
 } from "@/components/ui/popover"
 import { Button } from '../ui/button'
 import { Menu, LogOutIcon, User2 } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import jobImage from "../../assets/job.png"
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { toast } from '../ui/toast'
+import { logoutUser } from '@/services/api'
+import { setUser } from '@/redux/authSlice'
 const Navbar = () => {
   const { user } = useSelector(store => store.auth)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const logoutHandler = async() => {
+    try {
+      const response = await logoutUser()
+      if (response.data.success) {
+        dispatch(setUser(null));
+        navigate("/");
+        toast.add({
+          type: "success",
+          title: response?.data?.message
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      toast.add({
+        type: "error",
+        title: error.response?.data?.message
+      });
+    }
+  }
   return (
     <div>
       <div className='flex justify-between items-center mx-auto max-w-7xl h-16 w-full px-4'>
@@ -41,24 +65,24 @@ const Navbar = () => {
                   <PopoverTrigger
                     render={
                       <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn"
+                        <AvatarImage src={user?.profile?.profilePhoto} alt="@shadcn"
                         ></AvatarImage>
                       </Avatar>
                     } />
                   <PopoverContent className="w-80">
                     <div className='flex gap-4 space-y-4'>
                       <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn"
+                        <AvatarImage src={user?.profile?.profilePhoto}  alt="@shadcn"
                         ></AvatarImage>
                       </Avatar>
                       <div>
-                        <PopoverTitle>Asif MernStack</PopoverTitle>
-                        <PopoverDescription className="text-sm text-muted-foreground">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, laboriosam.</PopoverDescription>
+                        <PopoverTitle>{user?.fullname}</PopoverTitle>
+                        <PopoverDescription className="text-sm text-muted-foreground">{user?.profile?.bio}</PopoverDescription>
                       </div>
                     </div>
                     <div className='px-12 flex gap-2'>
                       <Button size='sm' variant='outline'> <User2 /><Link to="/profile">View Profile</Link></Button>
-                      <Button variant='destructive' size='sm'> <LogOutIcon /> Logout</Button>
+                      <Button variant='destructive' size='sm' onClick={logoutHandler} > <LogOutIcon /> Logout</Button>
                     </div>
                   </PopoverContent>
                 </Popover>

@@ -19,15 +19,15 @@ const filterData = [
 
 const FilterCard = () => {
   return (
-    <div className='w-full p-3 rounded-md'>
-      <h1 className='font-bols text-lg '>Filter Jobs</h1>
+    <div className='w-auto p-3 rounded-md'>
+      <h1 className='font-bold text-lg '>Filter Jobs</h1>
       <hr className='mt-3'/>
       <RadioGroup>
         {
           filterData.map((item,index)=>{
             return(
               <div>
-                <h1 className='font-bold text-lg'>{item.filterType}</h1>
+                <h1 className='font-bold text-lg mt-2'>{item.filterType}</h1>
                 {
                   item.array.map((data,index)=>{
                     return(

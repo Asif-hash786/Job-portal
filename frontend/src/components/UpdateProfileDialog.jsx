@@ -180,13 +180,13 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
 
           </FieldGroup>
 
-          <DialogFooter>
+          <DialogFooter className="mt-4">
             <DialogClose
               render={<Button variant="outline" type="button">Cancel</Button>}
             />
 
             <Button type="submit" disabled={loading}>
-              {loading ? <Spinner /> : "Save changes"}
+              {loading ? <span className="flex gap-2 items-center"><Spinner /> Uploading..</span> : "Save changes"}
             </Button>
           </DialogFooter>
 

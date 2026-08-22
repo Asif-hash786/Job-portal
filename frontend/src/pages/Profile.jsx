@@ -51,13 +51,35 @@ const Profile = () => {
         </div>
         <div className='w-full max-w-sm items-center gap-1.5 flex'>
           <div>
-            {
-              isResume ? <a target='blank' href='https://Youtube.com' className=' w-full'><Button variant='outline'> <FileText />Resume</Button></a> :
-                <span>NA</span>
-            }
+            {user?.profile?.resume ? (
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={user.profile.resume}
+                className="w-full"
+              >
+                <Button variant="outline">
+                  <FileText />
+                  {user?.profile?.resumeOriginalName || "View Resume"}
+                </Button>
+              </a>
+            ) : (
+              <span>NA</span>
+            )}
           </div>
           <div>
-            <Button variant='outline'><Download size={12} /></Button>
+            {user?.profile?.resume && (
+              <a
+                href={user.profile.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+              >
+                <Button variant="outline">
+                  <Download size={12} />
+                </Button>
+              </a>
+          )}
           </div>
         </div>
       </div>
