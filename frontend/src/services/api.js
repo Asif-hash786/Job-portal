@@ -15,3 +15,10 @@ export const jobById = (id) => API.get(`/job/get/${id}`);
 
 
 export const applyJob = (id) => API.get(`/application/apply/${id}`);
+
+
+
+export const registerNewCompany = (userData) => API.post("/company/register", userData);
+export const updateCompany = (userData, id) => API.put(`/company/update/${id}`, userData);
+export const getCompanyById = (id) => API.get(`/company/get/${id}`);
+export const getAllCompany = () => API.get("/company/get");

@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { setSingleJob } from '@/redux/jobSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { applyJob, jobById } from '@/services/api';
+import { Spinner } from './ui/spinner';
 const JobDesciption = () => {
   const params = useParams();
   const id = params.id;
@@ -93,7 +94,7 @@ const JobDesciption = () => {
         >
           {loading ? (
             <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              <Spinner/>
               Applying...
             </>
           ) : isApplied ? (

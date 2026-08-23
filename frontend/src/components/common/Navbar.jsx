@@ -20,7 +20,7 @@ const Navbar = () => {
   const { user } = useSelector(store => store.auth)
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const logoutHandler = async() => {
+  const logoutHandler = async () => {
     try {
       const response = await logoutUser()
       if (response.data.success) {
@@ -43,15 +43,25 @@ const Navbar = () => {
     <div>
       <div className='flex justify-between items-center mx-auto max-w-7xl h-16 w-full px-4'>
         <div>
-          {/* <h1 className='text-2xl font-bold'>Job<span className='text-[#F83002]'>Portal</span></h1> */}
           <img src={jobImage} className='h-30 w-30  lg:h-40 lg:w-40' />
         </div>
         <div>
           <ul className='flex font-medium items-center gap-5'>
             <div className='hidden lg:flex items-cente  r gap-5'>
-              <Link to="/">Home</Link>
-              <Link to="/jobs">Jobs</Link>
-              <Link to="/browse">Browse</Link>
+              {
+                user && user.role === "recruiter" ? (
+                  <>
+                    <Link to="/admin/companies">Companies</Link>
+                    <Link to="/admin/job">Jobs</Link>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/">Home</Link>
+                    <Link to="/jobs">Jobs</Link>
+                    <Link to="/browse">Browse</Link>
+                  </>
+                )
+              }
             </div>
             <ModeToggle />
             {!user ? (
@@ -72,7 +82,7 @@ const Navbar = () => {
                   <PopoverContent className="w-80">
                     <div className='flex gap-4 space-y-4'>
                       <Avatar>
-                        <AvatarImage src={user?.profile?.profilePhoto}  alt="@shadcn"
+                        <AvatarImage src={user?.profile?.profilePhoto} alt="@shadcn"
                         ></AvatarImage>
                       </Avatar>
                       <div>
@@ -81,14 +91,18 @@ const Navbar = () => {
                       </div>
                     </div>
                     <div className='px-12 flex gap-2'>
-                      <Button size='sm' variant='outline'> <User2 /><Link to="/profile">View Profile</Link></Button>
+                      {
+                        user && user.role === "student" && (
+                          <Button size='sm' variant='outline'> <User2 /><Link to="/profile">View Profile</Link></Button>
+                        )
+                      }
                       <Button variant='destructive' size='sm' onClick={logoutHandler} > <LogOutIcon /> Logout</Button>
                     </div>
                   </PopoverContent>
                 </Popover>
               </li>
             )}
-            <li>
+            <li className='sm:block lg:hidden' >
               <Popover>
                 <PopoverTrigger render={<Menu />} />
                 <PopoverContent align="bottom" className="w-40" side='right'>

@@ -1,4 +1,7 @@
+import { response } from "express";
 import { prisma } from "../utils/db.js";
+import getdataUri from "../utils/dataUri.js";
+import cloudinary from "../utils/cloudinary.js";
 export const registerCompany = async (req, res) => {
     try {
         const { companyName } = req.body;
@@ -10,7 +13,7 @@ export const registerCompany = async (req, res) => {
         }
         const existingCompany = await prisma.company.findFirst({
             where: {
-                name:companyName
+                name: companyName
             }
         })
         if (existingCompany) {
@@ -41,8 +44,8 @@ export const getCompany = async (req, res) => {
             where: {
                 userId: userId
             },
-            include:{
-                job:true
+            include: {
+                job: true
             }
         })
         if (!companies) {
@@ -52,9 +55,9 @@ export const getCompany = async (req, res) => {
             })
         }
         return res.status(200).json({
-            message:"data fetched",
+            message: "data fetched",
             companies,
-            success:true
+            success: true
         })
     } catch (error) {
         console.log(error);
@@ -67,8 +70,8 @@ export const getCompanyById = async (req, res) => {
             where: {
                 id: companyId
             },
-            include:{
-                job:true
+            include: {
+                job: true
             }
         })
         if (!company) {
@@ -79,7 +82,7 @@ export const getCompanyById = async (req, res) => {
         }
         return res.status(200).json({
             company,
-            sucess: true
+            success: true
         })
     } catch (error) {
         console.log(error);
@@ -90,6 +93,13 @@ export const updateCompany = async (req, res) => {
         const { name, description, website, location } = req.body;
         const companyId = Number(req.params.id);
         const file = req.file;
+        let cloudResponse;
+        if (file) {
+            const fileUri = getdataUri(file);
+             cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
+                resource_type: "image",
+            });
+        }
         const company = await prisma.company.update({
             where: {
                 id: companyId
@@ -98,7 +108,8 @@ export const updateCompany = async (req, res) => {
                 name,
                 description,
                 website,
-                location
+                location,
+                logo: cloudResponse?.secure_url,
             }
         })
         if (!company) {
@@ -109,7 +120,8 @@ export const updateCompany = async (req, res) => {
         }
         return res.status(200).json({
             message: "Company information updated",
-            success: true
+            success: true,
+            company
         })
     } catch (error) {
         console.log(error);
