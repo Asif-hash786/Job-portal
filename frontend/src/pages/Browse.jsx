@@ -2,7 +2,7 @@ import Job from '@/components/cards/Job'
 import Navbar from '@/components/common/Navbar'
 import React from 'react'
 
-const randomJobs = [1, 2, 3,4,5,6,7]
+const randomJobs = [1,2,3,4,5,6,7]
 
 const Browse = () => {
 
@@ -14,7 +14,7 @@ const Browse = () => {
           {
             randomJobs.map((item, index) => {
               return (
-                <Job />
+                <Job/>
               )
             })
           }

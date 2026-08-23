@@ -43,7 +43,7 @@ const Navbar = () => {
     <div>
       <div className='flex justify-between items-center mx-auto max-w-7xl h-16 w-full px-4'>
         <div>
-          <img src={jobImage} className='h-30 w-30  lg:h-40 lg:w-40' />
+          <img src={jobImage} onClick={()=>navigate("/")} className='h-30 w-30  lg:h-40 lg:w-40 cursor-pointer' />
         </div>
         <div>
           <ul className='flex font-medium items-center gap-5'>
@@ -56,9 +56,9 @@ const Navbar = () => {
                   </>
                 ) : (
                   <>
-                    <Link to="/">Home</Link>
-                    <Link to="/jobs">Jobs</Link>
-                    <Link to="/browse">Browse</Link>
+                    <Link to="/"><Button variant='outline' className="cursor-pointer">Home</Button></Link>
+                    <Link to="/jobs"><Button variant='outline' className="cursor-pointer">Jobs</Button></Link>
+                    <Link to="/browse"><Button variant='outline' className="cursor-pointer">Browse</Button></Link>
                   </>
                 )
               }
