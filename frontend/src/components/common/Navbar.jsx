@@ -87,7 +87,13 @@ const Navbar = () => {
                       </Avatar>
                       <div>
                         <PopoverTitle>{user?.fullname}</PopoverTitle>
-                        <PopoverDescription className="text-sm text-muted-foreground">{user?.profile?.bio}</PopoverDescription>
+                        {
+                          user && user.role === "student" ? (
+                            <PopoverDescription className="text-sm text-muted-foreground">{user?.profile?.bio}</PopoverDescription>
+                          ) : (
+                            <PopoverDescription className="text-sm text-muted-foreground">Find your Best candidate through our this website</PopoverDescription>
+                          )
+                        }
                       </div>
                     </div>
                     <div className='px-12 flex gap-2'>
