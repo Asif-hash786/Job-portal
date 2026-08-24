@@ -12,19 +12,19 @@ const category = [
 
 const CategoryCrousel = () => {
   return (
-    <div>
-      <Carousel className="w-full max-w-xl mx-auto my-20">
+    <div className=''>
+      <Carousel className="my-20 w-60 mx-25 md:w-xl lg:w-auto">
         <CarouselContent>
           {
             category.map((cat, index) => (
-                <CarouselItem className="md:basis-1/2 lg-basis-1/3" key={index}>
-                  <Button variant='outline' className="rounded-xl">{cat}</Button>
-                </CarouselItem>
+              <CarouselItem className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4" key={index}>
+                <Button variant='outline' className="rounded-xl">{cat}</Button>
+              </CarouselItem>
             ))
           }
         </CarouselContent>
-        <CarouselPrevious/>
-        <CarouselNext/>
+        <CarouselPrevious />
+        <CarouselNext />
       </Carousel>
     </div>
   )
