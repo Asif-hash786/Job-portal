@@ -99,9 +99,12 @@ export const getJobById = async (req, res) => {
 export const getAdminJobs = async (req, res) => {
     try {
         const adminId = req.id;
-        const jobs = await prisma.job.findFirst({
+        const jobs = await prisma.job.findMany({
             where: {
                 userId: adminId
+            },
+            include:{
+                company:true    
             }
         })
         if (!jobs) {
