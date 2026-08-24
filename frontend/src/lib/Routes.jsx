@@ -1,3 +1,4 @@
+import { createBrowserRouter } from "react-router-dom";
 import Login from "@/pages/auth/Login";
 import Signup from "@/pages/auth/Signup";
 import Browse from "@/pages/Browse";
@@ -5,11 +6,14 @@ import Home from "@/pages/Home";
 import Jobs from "@/pages/Jobs";
 import Layout from "@/pages/Layout";
 import Profile from "@/pages/Profile";
-import { createBrowserRouter } from "react-router-dom";
 import JobDescription from "@/components/JobDescription"
 import Companies from "@/pages/admin/Companies";
 import CompanieCreate from "@/pages/admin/CompanieCreate";
 import CompanySetup from "@/pages/admin/CompanySetup";
+import AdminJob  from "@/pages/admin/AdminJob";
+import PostJobs from "@/pages/admin/PostJobs";
+import Applicants from "@/pages/admin/Applicants";
+
 const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -54,6 +58,18 @@ const appRouter = createBrowserRouter([
       {
         path:"/admin/companies/:id",
         element:<CompanySetup/>
+      },
+      {
+        path:"/admin/jobs",
+        element:<AdminJob/>
+      },
+      {
+        path:"/admin/jobs/create",
+        element:<PostJobs/>
+      },
+      {
+        path:"/admin/jobs/:id/applicants",
+        element:<Applicants/>
       }
     ]
   }
