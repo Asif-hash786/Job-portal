@@ -99,7 +99,11 @@ export const getApllicants = async (req, res) => {
             include: {
                 applications: {
                     include: {
-                        user: true
+                        user:{
+                            include:{
+                                profile:true
+                            }
+                        }
                     }
                 }
             },

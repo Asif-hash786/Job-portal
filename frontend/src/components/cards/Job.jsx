@@ -8,7 +8,11 @@ import { formatDistanceToNowStrict } from "date-fns";
 const Job = ({ job }) => {
   const navigate = useNavigate();
   return (
-    <div className='p-5 rounded-md shadow-xl border border-gray-200'>
+    <div className='p-5 rounded-md shadow-xl border border-gray-200 dark:border-gray-800
+  hover:border-blue-500/50
+  dark:hover:border-blue-400/40
+  bg-white dark:bg-gray-900
+  transition-all duration-200'>
       <div className='flex justify-between items-center'>
         <p className='text-sm text-gray-500'>
           <span className="font-normal text-gray-800">
@@ -23,7 +27,7 @@ const Job = ({ job }) => {
       <div className='flex items-center gap-2 my-2'>
         <Button className="p-6" variant='outline' size='icon'>
           <Avatar>
-            <AvatarImage src="https://cdn.brandfetch.io/idchmboHEZ/w/400/h/400/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B" />
+            <AvatarImage src={job?.company?.logo} />
           </Avatar>
         </Button>
         <div>
@@ -31,14 +35,14 @@ const Job = ({ job }) => {
           <p className='text-sm text-gray-500'>India</p>
         </div>
       </div>
-      <div>
+      <div> 
         <h1 className='font-bold text-lg my-2'>{job?.title}</h1>
         <p className='text-sm text-gray-600'>{job?.description}</p>
       </div>
       <div className='flex items-center gap-2 mt-4'>
-        <Badge className="text-blue-700 font-bold" variant='secondary'>{job?.position} Position</Badge>
-        <Badge className="text-red-700 font-bold" variant='secondary'>{job?.jobType}</Badge>
-        <Badge className="text-second font-bold" variant='secondary'>{job?.salary} Lpa</Badge>
+        <Badge className="bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300 rounded" variant='secondary'>{job?.position} Position</Badge>
+        <Badge className="bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300 rounded" variant='secondary'>{job?.jobType}</Badge>
+        <Badge className="bg-sky-50 text-sky-700 dark:bg-sky-950 dark:text-sky-300 rounded" variant='secondary'>{job?.salary} Lpa</Badge>
       </div>
       <div className='flex items-center gap-4 mt-4'>
         <Button variant='outline' onClick={() => navigate(`/description/${job?.id}`)} >Details</Button>

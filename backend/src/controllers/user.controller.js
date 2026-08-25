@@ -139,12 +139,10 @@ export const updateProfile = async (req, res) => {
     const { fullname, email, phoneNumber, bio, skills } = req.body;
     const file = req.file;
 
-    //cloudinary
-
     let cloudResponse;
     if (file) {
       const fileUri = getdataUri(file);
-      const cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
+      cloudResponse = await cloudinary.uploader.upload(fileUri.content, {
         resource_type: "auto",
       });
     }

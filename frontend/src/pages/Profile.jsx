@@ -7,8 +7,9 @@ import React, { useState } from 'react'
 import AppliedJobTable from '@/components/AppliedJobTable'
 import UpdateProfileDialog from '@/components/UpdateProfileDialog'
 import { useSelector } from 'react-redux'
-const isResume = true
+import useGetAppliedJob from '@/hooks/useGetAppliedJob'
 const Profile = () => {
+  useGetAppliedJob();
   const [open, setOpen] = useState(false);
   const { user } = useSelector(store => store.auth);
   return (
@@ -16,8 +17,8 @@ const Profile = () => {
       <div className='max-w-4xl mx-auto border border-gray-200 rounded-2xl my-5 p-8'>
         <div className='flex justify-between'>
           <div className='flex items-center gap-4'>
-            <Avatar className="h-24 w-24">
-              <AvatarImage src="https://cdn.brandfetch.io/idchmboHEZ/w/400/h/400/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B" alt="profile" />
+            <Avatar className="h-24 w-24">  
+              <AvatarImage src={user?.profile?.profilePhoto} alt="profile" />
             </Avatar>
             <div>
               <h1 className='font-medium text-xl '>{user?.fullname}</h1>

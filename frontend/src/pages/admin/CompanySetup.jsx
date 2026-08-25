@@ -73,7 +73,7 @@ const CompanySetup = () => {
   }, [singleCompany]);
 
   return (
-    <div className='max-w-xl mx-auto my-4'>
+    <div className='max-w-xl mx-auto my-4 px-4 md:px-0'>
       <form onSubmit={submitHandler}>
         <div className='flex item-center gap-5 p-2'>
           <Button onClick={() => navigate("/admin/companies")} variant='outline' className="cursor-pointer"><ArrowLeft /><span>Back</span></Button>
