@@ -12,10 +12,12 @@ export const logoutUser = () => API.get("/logout");
 
 export const allJobs = () => API.get("/job/get");
 export const jobById = (id) => API.get(`/job/get/${id}`);
+export const getAdminJob = () => API.get("/job/getadminjobs");
+export const registerJob = (userdata) => API.post("/job/post", userdata);
 
 
 export const applyJob = (id) => API.get(`/application/apply/${id}`);
-
+export const applicants = (id) => API.get(`/application/${id}/applicants`)
 
 
 export const registerNewCompany = (userData) => API.post("/company/register", userData);
