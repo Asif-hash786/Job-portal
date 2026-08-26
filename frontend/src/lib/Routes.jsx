@@ -10,18 +10,20 @@ import JobDescription from "@/components/JobDescription"
 import Companies from "@/pages/admin/Companies";
 import CompanieCreate from "@/pages/admin/CompanieCreate";
 import CompanySetup from "@/pages/admin/CompanySetup";
-import AdminJob  from "@/pages/admin/AdminJob";
+import AdminJob from "@/pages/admin/AdminJob";
 import PostJobs from "@/pages/admin/PostJobs";
 import Applicants from "@/pages/admin/Applicants";
-
+import { Outlet } from "react-router-dom";
+import ProtectedRoute from "@/pages/ProtectedRoute";
+import NotFound from "@/pages/NotFound";
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <Layout/>,
+    element: <Layout />,
     children: [
       {
-        index:true,
-        element: <Home />
+        index: true,
+        element: <ProtectedRoute allowedRoles={["student"]}><Home /></ProtectedRoute>
       },
       {
         path: "/login",
@@ -33,45 +35,50 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/jobs",
-        element: <Jobs />
+        element: <ProtectedRoute allowedRoles={["student"]}><Jobs /></ProtectedRoute>
       },
       {
         path: "/browse",
-        element: <Browse />
-      }, {
-        path: "/profile",
-        element: <Profile />
+        element: <ProtectedRoute allowedRoles={["student"]}><Browse /></ProtectedRoute>
       },
       {
-        path:"/description/:id",
-        element:<JobDescription/>
+        path: "/profile",
+        element: <ProtectedRoute allowedRoles={["student"]}><Profile /></ProtectedRoute>
+      },
+      {
+        path: "/description/:id",
+        element: <ProtectedRoute allowedRoles={["student"]}><JobDescription /></ProtectedRoute>
       },
       //Admin
       {
-        path:"/admin/companies",
-        element:<Companies/>
+        path: "/admin/companies",
+        element: <ProtectedRoute allowedRoles={["recruiter"]}><Companies /></ProtectedRoute>
       },
       {
-        path:"/admin/companies/create",
-        element:<CompanieCreate/>
+        path: "/admin/companies/create",
+        element: <ProtectedRoute allowedRoles={["recruiter"]}><CompanieCreate /></ProtectedRoute>
       },
       {
-        path:"/admin/companies/:id",
-        element:<CompanySetup/>
+        path: "/admin/companies/:id",
+        element: <ProtectedRoute allowedRoles={["recruiter"]}><CompanySetup /></ProtectedRoute>
       },
       {
-        path:"/admin/jobs",
-        element:<AdminJob/>
+        path: "/admin/jobs",
+        element: <ProtectedRoute allowedRoles={["recruiter"]}><AdminJob /></ProtectedRoute>
       },
       {
-        path:"/admin/jobs/create",
-        element:<PostJobs/>
+        path: "/admin/jobs/create",
+        element: <ProtectedRoute allowedRoles={["recruiter"]}><PostJobs /></ProtectedRoute>
       },
       {
-        path:"/admin/jobs/:id/applicants",
-        element:<Applicants/>
-      }
+        path: "/admin/jobs/:id/applicants",
+        element: <ProtectedRoute allowedRoles={["recruiter"]}><Applicants /></ProtectedRoute>
+      },
     ]
+  },
+  {
+    path: "*",
+    element: <NotFound />
   }
 ])
 export default appRouter;
