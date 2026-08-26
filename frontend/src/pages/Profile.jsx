@@ -6,7 +6,7 @@ import {
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-
+import Banner from '@/assets/banner.jpeg'
 import {
   Contact,
   Download,
@@ -38,10 +38,16 @@ const Profile = () => {
         <div className="overflow-hidden rounded-2xl border bg-card shadow-sm">
 
           {/* Cover */}
-          <div className="h-28 sm:h-36 bg-linear-to-r from-[#07AAA5] via-[#078f8b] to-[#066f6c]" />
+          <div className="h-28 sm:h-36 w-full overflow-hidden">
+            <img
+              src={Banner}
+              alt="Profile banner"
+              className="h-full w-full object-cover"
+            />
+          </div>
 
           {/* Profile Header */}
-          <div className="px-5 sm:px-8 pb-6">
+          <div className="px-5 sm:px-8 pb-6 relative">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 -mt-12">
 
               <div className="flex flex-col sm:flex-row sm:items-end gap-4">
@@ -79,7 +85,7 @@ const Profile = () => {
               </Button>
 
             </div>
-
+            {/* rest of file unchanged from here (Contact grid, Skills, Resume, etc.) */}
             {/* Contact */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-7">
 

@@ -62,7 +62,7 @@ const PostJobs = () => {
     }
   }
   return (
-    <div className='flex items-center justify-center mt-14 mx-4 md:mx-0'>
+    <div className='flex flex-col items-center justify-center mt-4 mx-4 md:mx-0'>
       <form onSubmit={submitHandler}>
         <div className='grid grid-cols-1 border shadow-xl px-4 py-2 rounded'>
           <div className='py-2'>
@@ -175,7 +175,11 @@ const PostJobs = () => {
               </Select>
             )
           }
-          <Button className="my-4" type="submit" onClick={submitHandler}>{loading ? <Spinner /> : "Post new Job"}</Button>
+          <Button className="my-4 cursor-pointer
+              bg-[#07AAA5]
+              hover:bg-[#078f8b]
+              text-white
+              dark:text-black" type="submit" onClick={submitHandler}>{loading ? <Spinner /> : "Post new Job"}</Button>
           {
             companies.length === 0 && <p className='text-xs text-red-500 font-semibold text-center my-2'>*Please register a company first before posting a jobs*</p>
           }

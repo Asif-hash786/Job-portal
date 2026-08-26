@@ -140,7 +140,7 @@ const ParticleText = ({
       ctx.clearRect(0, 0, width, height);
 
       if (glow && !reducedMotion) {
-        ctx.shadowBlur = particleSize *1.5 , 3;
+        ctx.shadowBlur = particleSize * 3;
         ctx.shadowColor = highlightColor;
       } else {
         ctx.shadowBlur = 0;
@@ -279,7 +279,7 @@ const ParticleText = ({
         }
       }
 
-      const maxParticles = Math.max(1800, Math.min(500, Math.floor((width * height) / 90)));
+      const maxParticles = Math.max(900, Math.min(5200, Math.floor((width * height) / 90)));
       const stride = Math.max(1, Math.ceil(targets.length / maxParticles));
       const baseRgb = hexToRgb(color);
       const highlightRgb = hexToRgb(highlightColor);
@@ -406,7 +406,7 @@ const ParticleText = ({
   return (
     <div
       ref={containerRef}
-      className={`relative block h-full min-h-40 w-full overflow-hidden touch-none ${className}`}
+      className={`relative block h-full min-h-60 w-full overflow-hidden touch-none ${className}`}
       style={style}
       aria-label={text}>
       <canvas

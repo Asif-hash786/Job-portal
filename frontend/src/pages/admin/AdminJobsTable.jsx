@@ -90,7 +90,7 @@ const AdminJobsTable = () => {
                         </Button>
                         <div className='flex items-center' onClick={()=>navigate(`/admin/jobs/${job.id}/applicants`)}>
                           <Button variant='ghost' className="cursor-pointer">
-                            <EyeClosed/>
+                            <Eye/>
                           <span>Applicants</span>
                           </Button>
                         </div>

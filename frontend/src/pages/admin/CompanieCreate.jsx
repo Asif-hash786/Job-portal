@@ -45,7 +45,11 @@ const CompanieCreate = () => {
           onChange={(e) => setCompanyName(e.target.value)} ></Input>
         <div className='flex gap-2'>
           <Button variant='outline' className="cursor-pointer" onClick={() => navigate("/admin/companies")}>cancel</Button>
-          <Button variant='outline' className="bg-first cursor-pointer hover:bg-[#26afaf] dark:bg-first dark:hover:bg-[#26afaf]" onClick={registerCompany}>Continue</Button>
+          <Button variant='outline' className="cursor-pointer
+              bg-[#07AAA5]
+              hover:bg-[#078f8b]
+              text-white
+              dark:text-white"onClick={registerCompany}>Continue</Button>
         </div>
       </div>
     </div>

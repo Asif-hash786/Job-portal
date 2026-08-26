@@ -268,7 +268,7 @@ const Signup = () => {
               </Label>
 
               <span className="text-[10px] text-red-400">
-                (optional)
+                Required
               </span>
             </div>
 
