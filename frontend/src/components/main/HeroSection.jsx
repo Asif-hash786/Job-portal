@@ -25,7 +25,7 @@ const HeroSection = () => {
   return (
     <div className='text-center mt-4'>
       <div className='flex flex-col gap-5'>
-        <span className='pt-2 mx-auto text-2xl'>
+        <span className='pt-2 mx-auto text-2xl tracking-widest'>
           <ShinyText
             text="Where Talent Meets Opportunity"
             speed={2}

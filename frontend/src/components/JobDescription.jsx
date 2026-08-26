@@ -137,11 +137,11 @@ const JobDesciption = () => {
 
       {/* Description */}
       <div className="mt-6 border rounded-xl p-5 sm:p-6 bg-card">
-        <h2 className="font-semibold text-lg border-b border-b-gray-200 pb-3 mb-4">
+        <h2 className="font-semibold text-lg border-b border-b-first pb-3 mb-4">
           Job Description
         </h2>
 
-        <p className="text-gray-700 leading-relaxed whitespace-pre-line mb-6">
+        <p className="text-foreground leading-relaxed whitespace-pre-line mb-6">
           {singleJob?.description}
         </p>
 
@@ -156,7 +156,7 @@ const JobDesciption = () => {
                 <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
                   {label}
                 </p>
-                <p className="text-sm font-medium text-gray-800 wrap-break-words">
+                <p className="text-sm font-medium text-foreground  wrap-break-words">
                   {value || "—"}
                 </p>
               </div>
