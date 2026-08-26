@@ -1,48 +1,38 @@
-const socialLinks = [
-	{
-		label: 'X',
-		href: 'https://x.com',
-	},
-	{
-		label: 'Facebook',
-		href: 'https://www.facebook.com',
-	},
-	{
-		label: 'LinkedIn',
-		href: 'https://www.linkedin.com',
-	},
-]
+import { RiFacebookLine, RiGithubFill, RiTwitterXLine } from "@remixicon/react";
+import { Button } from "../ui/button";
+
+
+const socials = [
+  { href: "https://x.com/yourhandle", label: "X", Icon: RiTwitterXLine },
+  { href: "https://facebook.com/yourpage", label: "Facebook", Icon: RiFacebookLine },
+  { href: "https://github.com/yourrepo", label: "GitHub", Icon: RiGithubFill },
+];
 
 const Footer = () => {
-	return (
-		<footer className='mt-16 border-t bg-muted/30'>
-			<div className='mx-auto flex max-w-7xl flex-col items-center justify-between gap-5 px-4 py-7 sm:flex-row'>
-				<p className='text-center text-sm text-muted-foreground sm:text-left'>
-					&copy; {new Date().getFullYear()} JobPortal. All rights reserved.
-				</p>
+  return (
+    <footer className="flex items-center justify-between px-6 py-4 border-t">
+      <p className="text-sm text-muted-foreground">
+        © {new Date().getFullYear()} YourSite. All rights reserved.
+      </p>
 
-				<nav aria-label='Social media links'>
-					<ul className='flex items-center gap-2'>
-						{socialLinks.map(({ label, href }) => (
-							<li key={label}>
-								<a
-									href={href}
-									target='_blank'
-									rel='noreferrer'
-									aria-label={`JobPortal on ${label}`}
-									className='flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-primary hover:text-primary-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring'
-								>
-									<span className='text-xs font-semibold'>
-										{label === 'LinkedIn' ? 'in' : label === 'Facebook' ? '' : 'X'}
-									</span>
-								</a>
-							</li>
-						))}
-					</ul>
-				</nav>
-			</div>
-		</footer>
-	)
-}
+      <div className="flex items-center gap-1">
+        {socials.map(({ href, label, Icon }) => (
+          <Button
+            key={label}
+            asChild
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#07AAA5]/10 text-[#07AAA5] border border-[#4ff2ed]"
+          >
+            <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
+              <Icon className="h-5 w-5" />
+            </a>
+          </Button>
+        ))}
+      </div>
+    </footer>
+  );
+};
 
-export default Footer
+export default Footer;

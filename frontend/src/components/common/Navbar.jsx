@@ -40,34 +40,35 @@ const Navbar = () => {
     }
   }
   return (
-    <div>
+    <div className='sticky top-0 bg-white/40 backdrop-blur-sm dark:bg-black/50 z-1'>
       <div className='flex justify-between items-center mx-auto max-w-7xl h-16 w-full px-4'>
         <div>
-          <img src={jobImage} onClick={()=>navigate("/")} className='h-30 w-30  lg:h-40 lg:w-40 cursor-pointer' />
+          <img src={jobImage} onClick={() => navigate("/")} className='h-30 w-30  lg:h-40 lg:w-40 cursor-pointer' />
         </div>
         <div>
           <ul className='flex font-medium items-center gap-5'>
             <div className='hidden lg:flex items-cente  r gap-5'>
               {
+                user && (
                 user && user.role === "recruiter" ? (
                   <>
-                    <Link to="/admin/companies">Companies</Link>
-                    <Link to="/admin/jobs">Jobs</Link>
+                    <Button variant='outline'><Link to="/admin/companies">Companies</Link></Button>
+                    <Button variant='outline'><Link to="/admin/jobs">Jobs</Link></Button>
                   </>
                 ) : (
                   <>
-                    <Link to="/"><Button variant='outline' className="cursor-pointer">Home</Button></Link>
-                    <Link to="/jobs"><Button variant='outline' className="cursor-pointer">Jobs</Button></Link>
-                    <Link to="/browse"><Button variant='outline' className="cursor-pointer">Browse</Button></Link>
+                    <Button variant='outline' className="cursor-pointer"><Link to="/">Home</Link></Button>
+                    <Button variant='outline' className="cursor-pointer"><Link to="/jobs">Jobs</Link></Button>
+                    <Button variant='outline' className="cursor-pointer"><Link to="/browse">Browse</Link></Button>
                   </>
+                )
                 )
               }
             </div>
             <ModeToggle />
             {!user ? (
               <li className='flex gap-2'>
-                <Link to="/login"><Button variant='outline' size='sm' className="cursor-pointer">Login</Button></Link>
-                <Link to="/signup"><Button size='sm' className="cursor-pointer bg-first">SignUp</Button></Link>
+                <Link to="/login"><Button size='sm' className="cursor-pointer bg-first">Login</Button></Link>
               </li>
             ) : (
               <li className='cursor-pointer'>
@@ -102,24 +103,57 @@ const Navbar = () => {
                           <Button size='sm' variant='outline'> <User2 /><Link to="/profile">View Profile</Link></Button>
                         )
                       }
-                      <Button variant='destructive' size='sm' onClick={logoutHandler} > <LogOutIcon /> Logout</Button>
+                      <Button variant='destructive' size='sm' onClick={logoutHandler} className="cursor-pointer" > <LogOutIcon /> Logout</Button>
                     </div>
                   </PopoverContent>
                 </Popover>
               </li>
             )}
-            <li className='sm:block lg:hidden' >
+            <li className="block lg:hidden">
               <Popover>
-                <PopoverTrigger render={<Menu />} />
-                <PopoverContent align="bottom" className="w-40" side='right'>
-                  <div className="flex flex-col gap-3">
-                    <a href="/">Home</a>
-                    <a href="/jobs">Jobs</a>
-                    <a href="/browse">Browse</a>
-                  </div>
-                </PopoverContent>
-              </Popover>
-            </li>
+  {user && (
+    <>
+      <PopoverTrigger asChild>
+        <Button
+          type="button"
+          variant="outline"
+          size="icon"
+          className="cursor-pointer"
+        >
+          <Menu className="h-5 w-5" />
+        </Button>
+      </PopoverTrigger>
+
+      <PopoverContent align="end" side="bottom" className="w-48">
+        <div className="flex flex-col gap-2">
+          {user?.role === "recruiter" ? (
+            <>
+              <Link to="/admin/companies" className="rounded-md px-3 py-2 hover:bg-muted">
+                Companies
+              </Link>
+              <Link to="/admin/jobs" className="rounded-md px-3 py-2 hover:bg-muted">
+                Jobs
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/" className="rounded-md px-3 py-2 hover:bg-muted">
+                Home
+              </Link>
+              <Link to="/jobs" className="rounded-md px-3 py-2 hover:bg-muted">
+                Jobs
+              </Link>
+              <Link to="/browse" className="rounded-md px-3 py-2 hover:bg-muted">
+                Browse
+              </Link>
+            </>
+          )}
+        </div>
+      </PopoverContent>
+    </>
+  )}
+</Popover>
+</li>
           </ul>
         </div>
       </div>

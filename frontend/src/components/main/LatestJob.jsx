@@ -9,7 +9,8 @@ const LatestJob = () => {
       <h1 className='text-xl md:text-2xl lg:text-4xl font-bold'> <span className='text-first'>Latest & Top </span>Job Openings</h1>
       <div className='grid grid-cols-2 lg:grid-cols-3 gap-4 my-5 cursor-pointer'>
         {
-          allJobs.length <= 0 ? <span>No Job Available</span> : allJobs.map((job) => <LatestJobCard key={job.id} job={job} />)
+          allJobs.length <= 0 ? <span>No Job Available</span> : allJobs.map((job) => 
+          <LatestJobCard key={job.id} job={job} />)
         }
       </div>
     </div>

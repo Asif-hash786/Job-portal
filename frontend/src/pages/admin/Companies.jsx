@@ -20,11 +20,11 @@ const Companies = () => {
         <Input className="w-fit" placeholder="Filter by name" onChange={(e)=>setInput(e.target.value)} />
         <Button onClick={()=>navigate("/admin/companies/create")} className="cursor-pointer">New Company</Button>
       </div>
-      <div className='my-5'>
+      <div className='rounded-2xl border bg-card shadow-sm overflow-hidden my-6'>
         <CompaniesTable/>
       </div>
     </div>
   )
-}
+} 
 
 export default Companies

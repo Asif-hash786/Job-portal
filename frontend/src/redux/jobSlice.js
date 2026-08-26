@@ -7,7 +7,7 @@ const jobSlice = createSlice({
     allAdminJobs: [],
     searchJobByText: "",
     allAppliedJobs: [],
-    searchedQuery: "",
+    searchedQuery: null
   },
   reducers: {
     setAllJobs: (state, action) => {

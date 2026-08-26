@@ -6,6 +6,9 @@ import { setSingleJob } from '@/redux/jobSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { applyJob, jobById } from '@/services/api';
 import { Spinner } from './ui/spinner';
+import { Toast } from './ui/toast'; // adjust to whatever toast lib you're using
+import { Briefcase, MapPin, IndianRupee, Users, CalendarDays } from 'lucide-react';
+
 const JobDesciption = () => {
   const params = useParams();
   const id = params.id;
@@ -14,6 +17,7 @@ const JobDesciption = () => {
   const dispatch = useDispatch();
   const [isApplied, setIsApplied] = useState(false);
   const [loading, setLoading] = useState(false);
+
   const applyJobHandler = async () => {
     try {
       setLoading(true)
@@ -25,29 +29,20 @@ const JobDesciption = () => {
           ...singleJob,
           applications: [
             ...(singleJob?.applications || []),
-            {
-              applicant: user?.id,
-            },
+            { applicant: user?.id },
           ],
         };
 
         dispatch(setSingleJob(updatedSingleJob));
 
-        toast.add({
-          type: "success",
-          title: response.data.message,
-        });
+        Toast.success(response.data.message);
       }
     } catch (error) {
       console.log(error);
-      toast.add({
-        type: "error",
-        title: response?.data?.message
-      });
+      Toast.error(error?.response?.data?.message || "Something went wrong");
     } finally {
       setLoading(false)
     }
-
   }
 
   useEffect(() => {
@@ -56,13 +51,11 @@ const JobDesciption = () => {
         const response = await jobById(id);
         if (response.data.success) {
           const job = response.data.job;
-
           dispatch(setSingleJob(job));
 
           const alreadyApplied = job.applications?.some(
             (application) => application.applicant === user?.id
           );
-
           setIsApplied(alreadyApplied || false);
         }
       } catch (error) {
@@ -73,30 +66,67 @@ const JobDesciption = () => {
       fetchSingleJob();
     }
   }, [id, dispatch, user?.id])
+
+  const details = [
+    { label: "Role", value: singleJob?.title, icon: Briefcase },
+    { label: "Location", value: singleJob?.location, icon: MapPin },
+    { label: "Experience", value: singleJob?.experienceLevel, icon: Briefcase },
+    { label: "Salary", value: singleJob?.salary ? `${singleJob.salary} LPA` : undefined, icon: IndianRupee },
+    { label: "Applicants", value: singleJob?.applications?.length ?? 0, icon: Users },
+    {
+      label: "Posted",
+      value: singleJob?.createdAt ? new Date(singleJob.createdAt).toLocaleDateString() : undefined,
+      icon: CalendarDays,
+    },
+  ];
+
   return (
-    <div className='max-w-7xl mx-auto my-10'>
-      <div className='flex items-center justify-between'>
-        <div>
-          <h1 className='font-bold text-xl'>{singleJob?.title}</h1>
-          <div className='flex items-center gap-2 mt-4'>
-            <Badge className="text-blue-700 font-bold" variant='secondary'>{singleJob?.position} Position</Badge>
-            <Badge className="text-red-700 font-bold" variant='secondary'>{singleJob?.jobType}</Badge>
-            <Badge className="text-second font-bold" variant='secondary'>{singleJob?.salary} Lpa</Badge>
+    <div className="max-w-4xl mx-auto my-6 sm:my-10 px-4 sm:px-6">
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border rounded-xl p-5 sm:p-6 bg-card">
+        <div className="min-w-0">
+          <h1 className="font-bold text-xl sm:text-2xl truncate">{singleJob?.title}</h1>
+          <div className="flex flex-wrap items-center gap-2 mt-3">
+            <Badge
+              variant="ghost"
+              className="
+                          rounded
+                          bg-blue-50 text-blue-700
+                          dark:bg-blue-950 dark:text-blue-300
+                        "
+            >{singleJob?.position} Position{singleJob?.position > 1 ? "s" : ""}</Badge>
+            <Badge
+              variant="ghost"
+              className="
+                          rounded
+                          bg-red-50 text-red-700
+                          dark:bg-red-950 dark:text-red-300
+                        "
+            >{singleJob?.jobType}</Badge>
+            <Badge
+              variant="ghost"
+              className="
+                          rounded
+                          bg-sky-50 text-sky-700
+                          dark:bg-sky-950 dark:text-sky-300
+                        "
+            >{singleJob?.salary} LPA</Badge>
           </div>
         </div>
+
         <Button
           onClick={applyJobHandler}
           disabled={isApplied || loading}
-          className={`rounded-lg ${isApplied
-              ? "bg-gray-600 cursor-not-allowed"
-              : "bg-first hover:bg-[#068888e5]"
+          className={`w-full sm:w-auto rounded-lg shrink-0 cursor-pointer ${isApplied
+            ? "bg-gray-600 cursor-not-allowed"
+            : "bg-first hover:bg-[#068888e5]"
             }`}
         >
           {loading ? (
-            <>
-              <Spinner/>
+            <span className="flex items-center gap-2">
+              <Spinner />
               Applying...
-            </>
+            </span>
           ) : isApplied ? (
             "Already Applied"
           ) : (
@@ -104,15 +134,35 @@ const JobDesciption = () => {
           )}
         </Button>
       </div>
-      <h1 className='border-b-2 border-b-gray-300 font-medium py-4'> Job Description</h1>
-      <div className='my-4'>
-        <h1 className='font-bold my-1'>Role : <span className='pl-4 font-normal text-gray-800'>{singleJob?.title}</span></h1>
-        <h1 className='font-bold my-1'>Location : <span className='pl-4 font-normal text-gray-800'>{singleJob?.location}</span></h1>
-        <h1 className='font-bold my-1'>Description : <span className='pl-4 font-normal text-gray-800'>{singleJob?.description}</span></h1>
-        <h1 className='font-bold my-1'>Experience : <span className='pl-4 font-normal text-gray-800'>{singleJob?.experienceLevel}</span></h1>
-        <h1 className='font-bold my-1'>Salary : <span className='pl-4 font-normal text-gray-800'>{singleJob?.salary} LPA</span></h1>
-        <h1 className='font-bold my-1'>Total Applicants : <span className='pl-4 font-normal text-gray-800'>{singleJob?.applications?.length || 0}</span></h1>
-        <h1 className='font-bold my-1'>Posted Date : <span className='pl-4 font-normal text-gray-800'>{new Date(singleJob?.createdAt).toLocaleDateString()}</span></h1>
+
+      {/* Description */}
+      <div className="mt-6 border rounded-xl p-5 sm:p-6 bg-card">
+        <h2 className="font-semibold text-lg border-b border-b-gray-200 pb-3 mb-4">
+          Job Description
+        </h2>
+
+        <p className="text-gray-700 leading-relaxed whitespace-pre-line mb-6">
+          {singleJob?.description}
+        </p>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {details.map(({ label, value, icon: Icon }) => (
+            <div
+              key={label}
+              className="flex items-start gap-3 rounded-lg border p-3 bg-muted/30"
+            >
+              <Icon className="h-4 w-4 mt-0.5 text-muted-foreground shrink-0" />
+              <div className="min-w-0">
+                <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                  {label}
+                </p>
+                <p className="text-sm font-medium text-gray-800 wrap-break-words">
+                  {value || "—"}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )

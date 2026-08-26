@@ -5,7 +5,7 @@ import LatestJob from '@/components/main/LatestJob'
 import userGetAllJobs from '@/hooks/userGetAllJobs'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { Accepted, Pending, Rejected } from '@/components/ui/UpdatedBadge'
+import SplitText from '@/components/SplitText'
 const Home = () => {
   const { user } = useSelector(store => store.auth);
   const navigate = useNavigate();

@@ -21,7 +21,9 @@ const AdminJob = () => {
         <Button onClick={()=>navigate("/admin/jobs/create")} className="cursor-pointer">New Jobs</Button>
       </div>
       <div className='my-5'>
-        <AdminJobsTable/>
+        <div className='rounded-2xl border bg-card shadow-sm overflow-hidden my-6'>
+          <AdminJobsTable/>
+        </div>
       </div>
     </div>
   )
