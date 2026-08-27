@@ -15,6 +15,11 @@ app.use(cors({
   credentials:true
 }))
 
+
+app.get("/api/v1/test", (req, res) => {
+  res.json({ message: "Backend working" });
+});
+
 app.use("/api/v1",userRouter);
 app.use("/api/v1/company",companyRouter);
 app.use("/api/v1/job",jobRouter);

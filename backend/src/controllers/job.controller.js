@@ -3,7 +3,7 @@ import { prisma } from "../utils/db.js";
 export const postJob = async (req, res) => {
     console.log("post controller hit")
     try {
-        const { title, description, requirements, salary, location, jobType, position, companyId,experienceLevel } = req.body;
+        const { title, description, requirements, salary, location, jobType, position, companyId, experienceLevel } = req.body;
         const userId = req.id;
         if (!title || !description || !requirements || !salary || !location || !jobType || !position || !companyId || !experienceLevel) {
             return res.status(400).json({
@@ -37,42 +37,52 @@ export const postJob = async (req, res) => {
 }
 export const getAllJob = async (req, res) => {
     try {
-        const keyword = req.query.keyword || ""
-        const query = {
-            $or: [
-                { title: { $regex: keyword, $option: "i" } },
-                { description: { $regex: keyword, $option: "i" } }
-            ]
+        let keyword = req.query.keyword || "";
+
+        // Handle ?keyword=null
+        if (keyword === "null" || keyword === "undefined") {
+            keyword = "";
         }
+
         const jobs = await prisma.job.findMany({
-            where: {
-                OR: [
-                    {
-                        title: {
-                            contains: keyword,
-                            mode: "insensitive"
+            where: keyword
+                ? {
+                    OR: [
+                        {
+                            title: {
+                                contains: keyword,
+                                mode: "insensitive"
+                            }
+                        },
+                        {
+                            description: {
+                                contains: keyword,
+                                mode: "insensitive"
+                            }
                         }
-                    }
-                ]
-            },
-            include:{
-                company:true
+                    ]
+                }
+                : undefined,
+
+            include: {
+                company: true
             }
-        })
-        if (jobs.length===0) {
-            return res.status(404).json({
-                message: "Jobs not found",
-                success: false
-            })
-        }
+        });
+
         return res.status(200).json({
             jobs,
             success: true
-        })
+        });
+
     } catch (error) {
         console.log(error);
+
+        return res.status(500).json({
+            message: "Failed to get jobs",
+            success: false
+        });
     }
-}
+};
 
 export const getJobById = async (req, res) => {
     const jobId = Number(req.params.id);
@@ -80,8 +90,8 @@ export const getJobById = async (req, res) => {
         where: {
             id: jobId
         },
-        include:{
-            applications:true
+        include: {
+            applications: true
         }
     })
     if (!job) {
@@ -103,8 +113,8 @@ export const getAdminJobs = async (req, res) => {
             where: {
                 userId: adminId
             },
-            include:{
-                company:true    
+            include: {
+                company: true
             }
         })
         if (!jobs) {
