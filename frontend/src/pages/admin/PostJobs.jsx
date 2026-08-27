@@ -53,7 +53,7 @@ const PostJobs = () => {
       }
     } catch (error) {
       console.log(error);
-      toast .add({
+      toast.add({
         type: "error",
         title: error.response.data.message,
       });
@@ -62,9 +62,10 @@ const PostJobs = () => {
     }
   }
   return (
-    <div className='flex flex-col items-center justify-center mt-4 mx-4 md:mx-0'>
-      <form onSubmit={submitHandler}>
-        <div className='grid grid-cols-1 border shadow-xl px-4 py-2 rounded'>
+    <div className='flex flex-col items-center justify-center mt-4 px-4 sm:px-6 mb-5'>
+      <form onSubmit={submitHandler} className='w-full max-w-2xl'>
+        <h1 className='text-lg sm:text-xl py-4 font-semibold text-center sm:text-left'>Create a New Job</h1>
+        <div className='grid grid-cols-1 border shadow-xl px-4 sm:px-6 py-4 rounded'>
           <div className='py-2'>
             <Label>Title</Label>
             <Input
@@ -85,7 +86,7 @@ const PostJobs = () => {
               onChange={changeEventHandler}
             />
           </div>
-          <div className='grid grid-cols-2 gap-2'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4'>
             <div>
               <Label>Requirements</Label>
               <Input
@@ -105,7 +106,7 @@ const PostJobs = () => {
             <div>
               <Label>ExperienceLevel</Label>
               <Input
-                type="Number"
+                type="number"
                 name="experienceLevel"
                 className="mt-2"
                 value={input.experienceLevel}
@@ -156,7 +157,7 @@ const PostJobs = () => {
           {
             companies.length > 0 && (
               <Select onValueChange={selectChangeHandler}>
-                <SelectTrigger className="mt-4">
+                <SelectTrigger className="mt-4 w-full">
                   <SelectValue placeholder={"Select a company"} />
                 </SelectTrigger>
                 <SelectContent>
@@ -175,11 +176,16 @@ const PostJobs = () => {
               </Select>
             )
           }
-          <Button className="my-4 cursor-pointer
+          <Button
+            className="my-4 w-full sm:w-auto cursor-pointer
               bg-[#07AAA5]
               hover:bg-[#078f8b]
               text-white
-              dark:text-black" type="submit" onClick={submitHandler}>{loading ? <Spinner /> : "Post new Job"}</Button>
+              dark:text-black"
+            type="submit"
+          >
+            {loading ? <Spinner /> : "Post new Job"}
+          </Button>
           {
             companies.length === 0 && <p className='text-xs text-red-500 font-semibold text-center my-2'>*Please register a company first before posting a jobs*</p>
           }

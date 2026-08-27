@@ -13,7 +13,6 @@ import CompanySetup from "@/pages/admin/CompanySetup";
 import AdminJob from "@/pages/admin/AdminJob";
 import PostJobs from "@/pages/admin/PostJobs";
 import Applicants from "@/pages/admin/Applicants";
-import { Outlet } from "react-router-dom";
 import ProtectedRoute from "@/pages/ProtectedRoute";
 import NotFound from "@/pages/NotFound";
 const appRouter = createBrowserRouter([
@@ -23,6 +22,12 @@ const appRouter = createBrowserRouter([
     children: [
       {
         index: true,
+        element:
+          <ProtectedRoute allowedRoles={["student"]}>
+            <Home />
+          </ProtectedRoute>
+      },
+      {
         element: <ProtectedRoute allowedRoles={["student"]}><Home /></ProtectedRoute>
       },
       {

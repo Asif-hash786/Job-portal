@@ -81,7 +81,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-64px)] flex items-center justify-center px-4">
+    <div className="mt-30 md:mt-5 flex items-center justify-center px-4">
       <div className="relative w-full max-w-md overflow-hidden rounded-2xl p-0.5">
 
   {/* Shining border */}

@@ -9,7 +9,6 @@ const useApplicants = (id) => {
     const fetchAllApplicants = async () => {
       try {
         const response = await applicants(id);
-        console.log(response.data);
         dispatch(setAllApplicants(response.data.job));
       } catch (error) {
         console.log(error);

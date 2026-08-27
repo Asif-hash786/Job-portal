@@ -50,18 +50,18 @@ const Navbar = () => {
             <div className='hidden lg:flex items-cente  r gap-5'>
               {
                 user && (
-                user && user.role === "recruiter" ? (
-                  <>
-                    <Button variant='outline'><Link to="/admin/companies">Companies</Link></Button>
-                    <Button variant='outline'><Link to="/admin/jobs">Jobs</Link></Button>
-                  </>
-                ) : (
-                  <>
-                    <Button variant='outline' className="cursor-pointer"><Link to="/">Home</Link></Button>
-                    <Button variant='outline' className="cursor-pointer"><Link to="/jobs">Jobs</Link></Button>
-                    <Button variant='outline' className="cursor-pointer"><Link to="/browse">Browse</Link></Button>
-                  </>
-                )
+                  user && user.role === "recruiter" ? (
+                    <>
+                      <Button variant='outline'><Link to="/admin/companies">Companies</Link></Button>
+                      <Button variant='outline'><Link to="/admin/jobs">Jobs</Link></Button>
+                    </>
+                  ) : (
+                    <>
+                      <Button variant='outline' className="cursor-pointer"><Link to="/">Home</Link></Button>
+                      <Button variant='outline' className="cursor-pointer"><Link to="/jobs">Jobs</Link></Button>
+                      <Button variant='outline' className="cursor-pointer"><Link to="/browse">Browse</Link></Button>
+                    </>
+                  )
                 )
               }
             </div>
@@ -74,11 +74,12 @@ const Navbar = () => {
               <li className='cursor-pointer'>
                 <Popover>
                   <PopoverTrigger
+                  nativeButton={false}
                     render={
-                      <Avatar>
-                        <AvatarImage src={user?.profile?.profilePhoto} alt="@shadcn"
-                        ></AvatarImage>
-                      </Avatar>
+                        <Avatar>
+                          <AvatarImage src={user?.profile?.profilePhoto}
+                          />
+                        </Avatar>
                     } />
                   <PopoverContent className="w-80">
                     <div className='flex gap-4 space-y-4'>
@@ -111,49 +112,49 @@ const Navbar = () => {
             )}
             <li className="block lg:hidden">
               <Popover>
-  {user && (
-    <>
-      <PopoverTrigger asChild>
-        <Button
-          type="button"
-          variant="outline"
-          size="icon"
-          className="cursor-pointer"
-        >
-          <Menu className="h-5 w-5" />
-        </Button>
-      </PopoverTrigger>
+                {user && (
+                  <>
+                    <PopoverTrigger render={
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="icon"
+                        className="cursor-pointer"
+                      >
+                        <Menu className="h-5 w-5" />
+                      </Button>
+                    } />
 
-      <PopoverContent align="end" side="bottom" className="w-48">
-        <div className="flex flex-col gap-2">
-          {user?.role === "recruiter" ? (
-            <>
-              <Link to="/admin/companies" className="rounded-md px-3 py-2 hover:bg-muted">
-                Companies
-              </Link>
-              <Link to="/admin/jobs" className="rounded-md px-3 py-2 hover:bg-muted">
-                Jobs
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link to="/" className="rounded-md px-3 py-2 hover:bg-muted">
-                Home
-              </Link>
-              <Link to="/jobs" className="rounded-md px-3 py-2 hover:bg-muted">
-                Jobs
-              </Link>
-              <Link to="/browse" className="rounded-md px-3 py-2 hover:bg-muted">
-                Browse
-              </Link>
-            </>
-          )}
-        </div>
-      </PopoverContent>
-    </>
-  )}
-</Popover>
-</li>
+                    <PopoverContent align="end" side="bottom" className="w-48">
+                      <div className="flex flex-col gap-2">
+                        {user?.role === "recruiter" ? (
+                          <>
+                            <Link to="/admin/companies" className="rounded-md px-3 py-2 hover:bg-muted">
+                              Companies
+                            </Link>
+                            <Link to="/admin/jobs" className="rounded-md px-3 py-2 hover:bg-muted">
+                              Jobs
+                            </Link>
+                          </>
+                        ) : (
+                          <>
+                            <Link to="/" className="rounded-md px-3 py-2 hover:bg-muted">
+                              Home
+                            </Link>
+                            <Link to="/jobs" className="rounded-md px-3 py-2 hover:bg-muted">
+                              Jobs
+                            </Link>
+                            <Link to="/browse" className="rounded-md px-3 py-2 hover:bg-muted">
+                              Browse
+                            </Link>
+                          </>
+                        )}
+                      </div>
+                    </PopoverContent>
+                  </>
+                )}
+              </Popover>
+            </li>
           </ul>
         </div>
       </div>

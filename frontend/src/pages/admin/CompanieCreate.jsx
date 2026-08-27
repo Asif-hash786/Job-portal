@@ -34,22 +34,22 @@ const CompanieCreate = () => {
     }
   }
   return (
-    <div className='max-w-4xl mx-auto'>
+    <div className='max-w-4xl mx-auto px-6 md:px-0'>
       <div className='my-10'>
         <h1 className='font-bold text-2xl'>Your Company Name</h1>
         <p className='text-gray-500'>what would you like to give your company name</p>
       </div>
       <div className='my-4'>
         <Label>Company Name</Label>
-        <Input type="text" className="my-2" placeholder="jobHunt, Microsoft etc.."
+        <Input type="text" className="my-4" placeholder="jobHunt, Microsoft etc.."
           onChange={(e) => setCompanyName(e.target.value)} ></Input>
         <div className='flex gap-2'>
-          <Button variant='outline' className="cursor-pointer" onClick={() => navigate("/admin/companies")}>cancel</Button>
+          <Button variant='outline' className="cursor-pointer" onClick={() => navigate("/admin/companies")}>Cancel</Button>
           <Button variant='outline' className="cursor-pointer
               bg-[#07AAA5]
               hover:bg-[#078f8b]
               text-white
-              dark:text-white"onClick={registerCompany}>Continue</Button>
+              dark:text-white dark:bg-[#07AAA5] dark:hover:bg-[#078f8b]"onClick={registerCompany}>Continue</Button>
         </div>
       </div>
     </div>

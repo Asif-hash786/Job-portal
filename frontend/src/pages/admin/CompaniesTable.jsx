@@ -20,18 +20,18 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 const CompaniesTable = () => {
-  const { companies ,searchCompanyByText} = useSelector(store => store.company)
+  const { companies, searchCompanyByText } = useSelector(store => store.company)
   const [filterCompany, setFilterCompany] = useState(companies);
   const navigate = useNavigate();
-  useEffect(()=>{
-    const filteredCompany = companies.length >= 0 && companies.filter((company)=>{
-      if(!searchCompanyByText){
+  useEffect(() => {
+    const filteredCompany = companies.length >= 0 && companies.filter((company) => {
+      if (!searchCompanyByText) {
         return true;
       }
       return company?.name?.toLowerCase().includes(searchCompanyByText.toLowerCase());
     });
     setFilterCompany(filteredCompany);
-  },[companies,searchCompanyByText])
+  }, [companies, searchCompanyByText])
   return (
     <div className="w-full overflow-x-auto">
       <div className="w-full min-h-100  ">
@@ -76,7 +76,7 @@ const CompaniesTable = () => {
                 {/* Action */}
                 <TableCell className="text-right">
                   <Popover>
-                    <PopoverTrigger asChild>
+                    <PopoverTrigger render={
                       <Button
                         variant="outline"
                         size="icon"
@@ -84,11 +84,12 @@ const CompaniesTable = () => {
                       >
                         <MoreHorizontal />
                       </Button>
-                    </PopoverTrigger>
- 
+                    } />
+
+
                     <PopoverContent className="w-28 p-2">
                       <Button
-                        onClick={()=>navigate(`/admin/companies/${company.id}`)}
+                        onClick={() => navigate(`/admin/companies/${company.id}`)}
                         variant="ghost"
                         className="w-full justify-start cursor-pointer"
                       >

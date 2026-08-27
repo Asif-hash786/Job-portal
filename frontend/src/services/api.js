@@ -10,10 +10,11 @@ export const loginUser = (userData) => API.post("/login", userData);
 export const updateProfile = (userData) => API.post("/profile/update", userData);
 export const logoutUser = () => API.get("/logout");
 
-export const allJobs = (searchedQuery) => API.get(`/job/get?keyword=${searchedQuery}`);
+
 export const jobById = (id) => API.get(`/job/get/${id}`);
 export const getAdminJob = () => API.get("/job/getadminjobs");
 export const registerJob = (userdata) => API.post("/job/post", userdata);
+export const allJobs = (searchedQuery = "") => API.get("/job/get", { params: { keyword: searchedQuery || "" } });
 
 
 export const applyJob = (id) => API.get(`/application/apply/${id}`);

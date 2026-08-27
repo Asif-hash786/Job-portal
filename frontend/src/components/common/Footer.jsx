@@ -19,11 +19,10 @@ const Footer = () => {
         {socials.map(({ href, label, Icon }) => (
           <Button
             key={label}
-            asChild
             type="button"
             variant="ghost"
             size="icon"
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#07AAA5]/10 text-[#07AAA5] border border-[#4ff2ed]"
+            className="flex h-8 w-8 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-lg bg-[#07AAA5]/10 text-[#07AAA5] border border-[#4ff2ed]"
           >
             <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
               <Icon className="h-5 w-5" />

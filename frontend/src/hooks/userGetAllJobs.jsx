@@ -1,4 +1,4 @@
-import { setAllJobs, setSearchedQuery } from '@/redux/jobSlice';
+import { setAllJobs} from '@/redux/jobSlice';
 import { allJobs } from '@/services/api'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,14 +10,13 @@ const userGetAllJobs = () => {
     const fetchAllJobs = async () => {
       try {
         const response = await allJobs(searchedQuery);
-        console.log(response.data);
         dispatch(setAllJobs(response.data.jobs))
       } catch (error) {
         console.log(error);
       }
     }
     fetchAllJobs();
-  }, [])
+  }, [searchedQuery,dispatch])
 }
 
 export default userGetAllJobs

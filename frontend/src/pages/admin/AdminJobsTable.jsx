@@ -69,7 +69,7 @@ const AdminJobsTable = () => {
                   {/* Action */}
                   <TableCell className="text-right">
                     <Popover>
-                      <PopoverTrigger asChild>
+                      <PopoverTrigger render={
                         <Button
                           variant="outline"
                           size="icon"
@@ -77,7 +77,7 @@ const AdminJobsTable = () => {
                         >
                           <MoreHorizontal />
                         </Button>
-                      </PopoverTrigger>
+                      } />
 
                       <PopoverContent className="w-32 p-2">
                         <Button
@@ -88,10 +88,10 @@ const AdminJobsTable = () => {
                           <Edit2 />
                           Edit
                         </Button>
-                        <div className='flex items-center' onClick={()=>navigate(`/admin/jobs/${job.id}/applicants`)}>
+                        <div className='flex items-center' onClick={() => navigate(`/admin/jobs/${job.id}/applicants`)}>
                           <Button variant='ghost' className="cursor-pointer">
-                            <Eye/>
-                          <span>Applicants</span>
+                            <Eye />
+                            <span>Applicants</span>
                           </Button>
                         </div>
                       </PopoverContent>

@@ -8,7 +8,6 @@ const useGetCompanyById = (companyId) => {
     const fetchSingleCompany = async () => {
       try {
         const response = await getCompanyById(companyId);
-        console.log("API RESPONSE:", response.data);
         if (response.data.success) {
           dispatch(setSingleCompany(response.data.company))
         }

@@ -157,16 +157,14 @@ const Job = ({ job }) => {
 
           <Button
             variant="outline"
-            className="w-full sm:w-auto"
+            className="w-full sm:w-auto cursor-pointer"
             onClick={() => navigate(`/description/${job?.id}`)}
           >
             Details
           </Button>
 
           <Button
-            className="
-              w-full
-              sm:w-auto
+            className="w-full sm:w-auto cursor-pointer
               bg-[#07AAA5]
               hover:bg-[#078f8b]
               text-white
