@@ -12,19 +12,9 @@ const Job = ({ job }) => {
   return (
     <div className="relative w-full overflow-hidden rounded-xl p-[1.5px]">
       <div
-        className="
-          absolute
-          inset-[-150%]
-          animate-[spin_5s_linear_infinite]
-          bg-[conic-gradient(from_0deg,transparent_0deg,#07AAA5_45deg,transparent_90deg)]
-        "
-      />
-      <div
-        className="
-          relative
-          h-full
-          w-full
-          rounded-xl
+        className="absolute inset-[-150%] animate-[spin_5s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0deg,#07AAA5_45deg,transparent_90deg)]
+        "/>
+      <div className="relative h-full w-full rounded-xl
           bg-white
           dark:bg-gray-950
           p-4
@@ -39,8 +29,8 @@ const Job = ({ job }) => {
           <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
             {job?.createdAt
               ? formatDistanceToNowStrict(new Date(job.createdAt), {
-                  addSuffix: true,
-                })
+                addSuffix: true,
+              })
               : 'N/A'}
           </p>
 
@@ -58,7 +48,6 @@ const Job = ({ job }) => {
           </Button>
         </div>
 
-        {/* Company */}
         <div className="flex items-center gap-3 my-4">
 
           <Avatar className="h-11 w-11 sm:h-12 sm:w-12 border">
@@ -79,8 +68,6 @@ const Job = ({ job }) => {
             </p>
           </div>
         </div>
-
-        {/* Job information */}
         <div>
           <h1 className="
             font-bold
@@ -105,7 +92,6 @@ const Job = ({ job }) => {
           </p>
         </div>
 
-        {/* Badges */}
         <div className="flex flex-wrap gap-2 mt-4">
 
           <Badge
@@ -152,7 +138,6 @@ const Job = ({ job }) => {
 
         </div>
 
-        {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-5">
 
           <Button
