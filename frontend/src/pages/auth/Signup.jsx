@@ -87,11 +87,7 @@ const Signup = () => {
 
   return (
     <div className="min-h-[calc(100vh-64px)] flex items-center justify-center px-4 py-6 sm:py-10">
-
-      {/* Shining Border Wrapper */}
       <div className="relative w-full max-w-lg overflow-hidden rounded-2xl p-0.5">
-
-        {/* Shining Border */}
         <div
           className="
             absolute
@@ -100,8 +96,6 @@ const Signup = () => {
             bg-[conic-gradient(from_0deg,transparent_0deg,#07AAA5_45deg,transparent_90deg)]
           "
         />
-
-        {/* Signup Card */}
         <form
           onSubmit={submitHandler}
           className="
@@ -118,8 +112,6 @@ const Signup = () => {
             shadow-xl
           "
         >
-
-          {/* Header */}
           <div className="text-center mb-6">
             <h1 className="text-2xl sm:text-3xl font-bold">
               Create Account
@@ -129,8 +121,6 @@ const Signup = () => {
               Join us and find your next opportunity
             </p>
           </div>
-
-          {/* Full Name */}
           <div className="mb-4">
             <Label
               htmlFor="fullname"
@@ -149,8 +139,6 @@ const Signup = () => {
               disabled={loading}
             />
           </div>
-
-          {/* Email */}
           <div className="mb-4">
             <Label
               htmlFor="email"
@@ -169,8 +157,6 @@ const Signup = () => {
               disabled={loading}
             />
           </div>
-
-          {/* Password */}
           <div className="mb-4">
             <Label
               htmlFor="password"
@@ -189,8 +175,6 @@ const Signup = () => {
               disabled={loading}
             />
           </div>
-
-          {/* Phone */}
           <div className="mb-4">
             <Label
               htmlFor="phoneNumber"
@@ -209,8 +193,6 @@ const Signup = () => {
               disabled={loading}
             />
           </div>
-
-          {/* Role */}
           <div className="mb-5">
             <Label className="mb-3 block">
               Register as
@@ -259,8 +241,6 @@ const Signup = () => {
 
             </RadioGroup>
           </div>
-
-          {/* Profile Image */}
           <div className="mb-5">
             <div className="flex items-center gap-2 mb-2">
               <Label htmlFor="profile">
@@ -287,8 +267,6 @@ const Signup = () => {
               </p>
             )}
           </div>
-
-          {/* Signup Button */}
           <Button
             type="submit"
             disabled={loading}
@@ -309,8 +287,6 @@ const Signup = () => {
               'Create Account'
             )}
           </Button>
-
-          {/* Login */}
           <p className="text-sm text-center mt-5 text-muted-foreground">
             Already have an account?{' '}
 
