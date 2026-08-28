@@ -52,7 +52,6 @@ const AdminJobsTable = () => {
             {
               filterjobs?.map((job) => (
                 <TableRow key={job.id}>
-                  {/* Company Name */}
                   <TableCell className="font-medium">
                     {job?.company?.name}
                   </TableCell>
@@ -60,13 +59,9 @@ const AdminJobsTable = () => {
                   <TableCell className="font-medium">
                     {job?.title}
                   </TableCell>
-
-                  {/* Date */}
                   <TableCell>
                     {new Date(job?.createdAt).toLocaleDateString()}
                   </TableCell>
-
-                  {/* Action */}
                   <TableCell className="text-right">
                     <Popover>
                       <PopoverTrigger render={
