@@ -52,8 +52,6 @@ const CompaniesTable = () => {
           <TableBody>
             {filterCompany?.map((company) => (
               <TableRow key={company.id}>
-
-                {/* Logo */}
                 <TableCell>
                   <Avatar>
                     <AvatarImage
@@ -62,18 +60,12 @@ const CompaniesTable = () => {
                     />
                   </Avatar>
                 </TableCell>
-
-                {/* Company Name */}
                 <TableCell className="font-medium">
                   {company.name}
                 </TableCell>
-
-                {/* Date */}
                 <TableCell>
                   {new Date(company.createdat).toLocaleDateString()}
                 </TableCell>
-
-                {/* Action */}
                 <TableCell className="text-right">
                   <Popover>
                     <PopoverTrigger render={
@@ -85,8 +77,6 @@ const CompaniesTable = () => {
                         <MoreHorizontal />
                       </Button>
                     } />
-
-
                     <PopoverContent className="w-28 p-2">
                       <Button
                         onClick={() => navigate(`/admin/companies/${company.id}`)}
