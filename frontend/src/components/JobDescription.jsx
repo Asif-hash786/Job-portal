@@ -6,7 +6,7 @@ import { setSingleJob } from '@/redux/jobSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { applyJob, jobById } from '@/services/api';
 import { Spinner } from './ui/spinner';
-import { Toast } from './ui/toast'; // adjust to whatever toast lib you're using
+import { Toast } from './ui/toast';
 import { Briefcase, MapPin, IndianRupee, Users, CalendarDays } from 'lucide-react';
 
 const JobDesciption = () => {
@@ -89,31 +89,16 @@ const JobDesciption = () => {
           <div className="flex flex-wrap items-center gap-2 mt-3">
             <Badge
               variant="ghost"
-              className="
-                          rounded
-                          bg-blue-50 text-blue-700
-                          dark:bg-blue-950 dark:text-blue-300
-                        "
-            >{singleJob?.position} Position{singleJob?.position > 1 ? "s" : ""}</Badge>
+              className="rounded bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300">{singleJob?.position} Position{singleJob?.position > 1 ? "s" : ""}</Badge>
             <Badge
               variant="ghost"
-              className="
-                          rounded
-                          bg-red-50 text-red-700
-                          dark:bg-red-950 dark:text-red-300
-                        "
-            >{singleJob?.jobType}</Badge>
+              className="rounded bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300">{singleJob?.jobType}</Badge>
             <Badge
               variant="ghost"
-              className="
-                          rounded
-                          bg-sky-50 text-sky-700
-                          dark:bg-sky-950 dark:text-sky-300
-                        "
+              className="rounded bg-sky-50 text-sky-700 dark:bg-sky-950 dark:text-sky-300"
             >{singleJob?.salary} LPA</Badge>
           </div>
         </div>
-
         <Button
           onClick={applyJobHandler}
           disabled={isApplied || loading}
