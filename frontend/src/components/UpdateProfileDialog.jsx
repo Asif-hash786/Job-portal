@@ -59,7 +59,6 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
     formData.append("phoneNumber", input.phoneNumber);
     formData.append("bio", input.bio);
 
-    // If skills is an array
     formData.append(
       "skills",
       Array.isArray(input.skills)

@@ -108,14 +108,11 @@ const FilterOptions = () => {
 const FilterCard = () => {
   return (
     <>
-      {/* ================= DESKTOP ================= */}
       <div className="hidden lg:block">
         <div className="w-full rounded-md border p-4 shadow-sm">
           <FilterOptions />
         </div>
       </div>
-
-      {/* ================= MOBILE + TABLET ================= */}
       <div className="lg:hidden">
         <Popover>
           <PopoverTrigger asChild>
