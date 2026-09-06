@@ -1,10 +1,8 @@
-## Live Demo
-
-[Job Portal](https://job-portal-rho-brown.vercel.app)
-
 ## 💼 Job Portal
 
 A full-stack Job Portal web application that connects **job seekers** with **recruiters**. Users can create profiles, upload resumes, explore jobs, and manage their applications, while recruiters can manage companies and job postings.
+#### Live Demo
+[Job Portal](https://job-portal-rho-brown.vercel.app)
 
 ## 🚀 Features
 
