@@ -16,8 +16,8 @@ app.use(cors({
 }))
 
 
-app.get("/api/v1/test", (req, res) => {
-  res.json({ message: "Backend working" });
+app.get("/health", (req, res) => {
+  res.json({ message: "Backend is working" });
 });
 
 app.use("/api/v1",userRouter);
