@@ -155,7 +155,7 @@ const Login = () => {
           <Button
             type="submit"
             disabled={loading}
-            className="w-fullbg-[#07AAA5]hover:bg-[#078f8b] text-whitecursor-pointer"
+            className="w-full bg-[#07AAA5] hover:bg-[#078f8b] text-white cursor-pointer"
           >
             {loading ? (
               <>
